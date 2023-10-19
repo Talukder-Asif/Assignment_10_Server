@@ -79,10 +79,9 @@ async function run() {
 
 // let find the producs based on the brans name
 
-    app.get("brands/:brand", async (req, res) => {
-      const brand = req.params.brand;
-      const quary = { brand: (brand) };
-      const result = await dataColletion.findOne(quary);
+    app.get("/brands/:brand", async (req, res) => {
+      const brand = req?.params?.brand;
+      const result = await dataColletion?.find({brand:brand})?.toArray();
       res.send(result);
     });
 
