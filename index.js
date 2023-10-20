@@ -54,7 +54,7 @@ async function run() {
       const result = await dataColletion.findOne(quary);
       res.send(result);
     });
-    // Let update the item
+    // Let update  the item
     app.put("/product/:id", async(req, res) => {
       const id = req.params.id;
       const filter = {_id: new ObjectId(id)};
