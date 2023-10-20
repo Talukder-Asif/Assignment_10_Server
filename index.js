@@ -27,6 +27,8 @@ async function run() {
     await client.connect();
     const dataColletion = client.db("productDB").collection("product");
 
+    const cartColletion = client.db("productDB").collection("cart");
+
     // To find the data form data base we can do this
     app.get("/product", async (req, res) => {
       const result = await dataColletion?.find().toArray();
@@ -38,6 +40,21 @@ async function run() {
       const result = await dataColletion?.insertOne(newproduct);
       res.send(result);
     });
+
+
+
+// Cart edition....
+
+app.post('/cart',async(req, res)=>{
+  const data = req.body;
+  const result = await cartColletion?.insertOne(data);
+  res.send(result);
+});
+
+
+
+
+
     // Delete a single item from the database
     app.delete("/product/:id", async (req, res) => {
       const id = req.params.id;
