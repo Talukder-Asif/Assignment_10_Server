@@ -43,18 +43,11 @@ async function run() {
 
 
 
-// Cart edition....
-
-app.post('/cart',async(req, res)=>{
-  const data = req.body;
-  const result = await cartColletion?.insertOne(data);
-  res.send(result);
-});
-
-
-
-
-
+    
+    
+    
+    
+    
     // Delete a single item from the database
     app.delete("/product/:id", async (req, res) => {
       const id = req.params.id;
@@ -63,7 +56,7 @@ app.post('/cart',async(req, res)=>{
       res.send(result);
     });
     // Update a single item in the database
-
+    
     // Before updating, lets find the item
     app.get("/product/:id", async (req, res) => {
       const id = req.params.id;
@@ -91,18 +84,30 @@ app.post('/cart',async(req, res)=>{
       const result = await dataColletion.updateOne(filter, updatedDoc, options);
       res.send(result);
     });
-
-
-
-// let find the producs based on the brans name
+    
+    
+    
+    // let find the producs based on the brans name
 
     app.get("/brands/:brand", async (req, res) => {
       const brand = req?.params?.brand;
       const result = await dataColletion?.find({brand:brand})?.toArray();
       res.send(result);
     });
+    
+    // Cart edition....
+    // Create Cart 
+    app.post('/cart',async(req, res)=>{
+      const data = req.body;
+      const result = await cartColletion?.insertOne(data);
+      res.send(result);
+    });
 
-
+// Get data of cart form database
+    app.get('/cart',async(req, res)=>{
+      const result = await cartColletion?.find().toArray();
+      res.send(result);
+    });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
