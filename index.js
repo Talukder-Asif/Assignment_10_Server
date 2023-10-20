@@ -41,20 +41,6 @@ async function run() {
       res.send(result);
     });
 
-
-
-    
-    
-    
-    
-    
-    // Delete a single item from the database
-    app.delete("/product/:id", async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: new ObjectId(id) };
-      const result = await dataColletion.deleteOne(query);
-      res.send(result);
-    });
     // Update a single item in the database
     
     // Before updating, lets find the item
@@ -108,6 +94,19 @@ async function run() {
       const result = await cartColletion?.find().toArray();
       res.send(result);
     });
+
+    // Delete a single item from the database
+    app.delete("/cart/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await cartColletion.deleteOne(query);
+      res.send(result);
+    });
+
+
+
+
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
